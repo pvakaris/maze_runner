@@ -35,11 +35,13 @@ public class ToolBoxManager {
      * Called when the "Run" button in the ToolBox is clicked.
      */
     public void runButtonWasClicked() {
-        toolBox.setDisable(true);
-        Monitor.runMaze();
-        toolBox.setInnerVBox(afterRunBox);
-        toolBox.disableRunButton();
-        toolBox.setDisable(false);
+        if(MapManager.getInstance().getCurrentMap().isValid()) {
+            toolBox.setDisable(true);
+            Monitor.runMaze();
+            toolBox.setInnerVBox(afterRunBox);
+            toolBox.disableRunButton();
+            toolBox.setDisable(false);
+        }
     }
 
     // ========          BeforeRun Inner ToolBox          ========

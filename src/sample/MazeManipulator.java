@@ -53,12 +53,12 @@ public class MazeManipulator {
     public void drawShortestPath() {
         boolean startReached = false;
         WalkableCell finishCell = (WalkableCell) map.getFinishCell();
-        finishCell.setColor(Color.web("dc2f02"));
+        finishCell.setColor(ColourGenerator.getColour(Colour.PATH_FINISH));
         WalkableCell cell = (WalkableCell) finishCell.getPreviousCell();
         while(!startReached) {
             WalkableCell cellNew = getPreviousCell(cell);
             if(cellNew == map.getStartCell()) {
-                cellNew.setColor(Color.web("e85d04"));
+                cellNew.setColor(ColourGenerator.getColour(Colour.PATH_START));
                 startReached = true;
             }
             cell = cellNew;
@@ -74,7 +74,7 @@ public class MazeManipulator {
      * @return An ancestor WalkableCell of the provided WalkableCell.
      */
     private WalkableCell getPreviousCell(WalkableCell cell) {
-        cell.setColor(Color.web("ffb703"));
+        cell.setColor(ColourGenerator.getColour(Colour.PATH));
         return (WalkableCell) cell.getPreviousCell();
     }
 

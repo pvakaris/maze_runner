@@ -15,7 +15,7 @@ public class WallCell extends Cell {
      * @param yInMap Y coordinate of the WallCell.
      */
     public WallCell(int xInMap, int yInMap) {
-        super(Color.web("0d141a"), xInMap, yInMap);
+        super(ColourGenerator.getColour(Colour.WALL), xInMap, yInMap);
     }
 }
 

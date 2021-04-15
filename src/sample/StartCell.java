@@ -14,6 +14,6 @@ public class StartCell extends WalkableCell {
      * @param yInMap Y coordinate of the WalkableCell.
      */
     public StartCell (int xInMap, int yInMap) {
-        super(xInMap, yInMap, Color.web("457b9d"));
+        super(xInMap, yInMap, ColourGenerator.getColour(Colour.START));
     }
 }

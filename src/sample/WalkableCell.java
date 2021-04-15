@@ -20,7 +20,7 @@ public class WalkableCell extends Cell {
      * @param yInMap Y coordinate of the WalkableCell.
      */
     public WalkableCell(int xInMap, int yInMap) {
-        super(Color.web("e9ecef"), xInMap, yInMap);
+        super(ColourGenerator.getColour(Colour.UNKNOWN), xInMap, yInMap);
 
         setStatus(CellStatus.UNKNOWN);
         previousCell = null;
@@ -61,7 +61,7 @@ public class WalkableCell extends Cell {
      */
     public void setExplored() {
         setStatus(CellStatus.EXPLORED);
-        setColor(Color.web("6096ba"));
+        setColor(ColourGenerator.getColour(Colour.EXPLORED));
     }
 
     /**
@@ -69,7 +69,7 @@ public class WalkableCell extends Cell {
      */
     public void setDiscovered() {
         setStatus(CellStatus.DISCOVERED);
-        setColor(Color.web("a3cef1"));
+        setColor(ColourGenerator.getColour(Colour.DISCOVERED));
     }
 
     /**

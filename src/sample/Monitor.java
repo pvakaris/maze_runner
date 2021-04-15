@@ -72,19 +72,13 @@ public class Monitor {
      * Used when the "Run maze" button is clicked. Performs the maze running process.
      */
     public static void runMaze() {
-        Map map = MapManager.getInstance().getCurrentMap();
-        if(map.isValid()) {
-            setMazeRunning(true);
-            MapManager.getInstance().makeMapCopy();
-            MazeManipulator maze = new MazeManipulator(map);
-            setMazeManipulator(maze);
-            maze.run();
-            setMazeRunning(false);
-            Informer.getInstance().updateMapInfo(MapManager.getInstance().getCurrentMap().toString());
-        }
-        else {
-            Informer.getInstance().updateStatusLabel(Mess);
-        }
+        setMazeRunning(true);
+        MapManager.getInstance().makeMapCopy();
+        MazeManipulator maze = new MazeManipulator(MapManager.getInstance().getCurrentMap());
+        setMazeManipulator(maze);
+        maze.run();
+        setMazeRunning(false);
+        Informer.getInstance().updateMapInfo(MapManager.getInstance().getCurrentMap().toString());
     }
 
     /**

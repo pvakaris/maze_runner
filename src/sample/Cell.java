@@ -21,11 +21,11 @@ public class Cell extends Rectangle{
      * @param xInMap Cell's x coordinate in map.
      * @param yInMap Cell's y coordinate in map.
      */
-    public Cell(Color color, int yInMap, int xInMap) {
+    public Cell(Color color, int xInMap, int yInMap) {
         super(15, 15);   // The default size of the cell.
 
-        yCoordinate = yInMap;
-        xCoordinate = xInMap;
+        yCoordinate = xInMap;
+        xCoordinate = yInMap;
 
         this.color = color;
         setFill(this.color);

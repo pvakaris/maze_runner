@@ -16,6 +16,6 @@ public class FinishCell extends WalkableCell {
      * @param yInMap Y coordinate of the FinishCell.
      */
     public FinishCell(int xInMap, int yInMap) {
-        super(xInMap, yInMap, Color.web("e63946"));
+        super(xInMap, yInMap, ColourGenerator.getColour(Colour.FINISH));
     }
 }
