@@ -2,6 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 /**
@@ -61,7 +62,7 @@ public class ToolBox extends VBox {
      */
     private Button setupRunButton() {
         runButton = new Button("Run maze");
-        runButton.setOnAction(this::runningMaze);
+        runButton.setOnMouseClicked(this::runningMaze);
         return runButton;
     }
 
@@ -69,8 +70,8 @@ public class ToolBox extends VBox {
      * Used when the "Run" button is clicked.
      * @param event A "Run" button click.
      */
-    private void runningMaze(ActionEvent event) {
-        ToolBoxManager.getInstance().runButtonWasClicked();
+    private void runningMaze(MouseEvent event) {
+        ToolBoxManager.getInstance().runButtonWasClicked(event);
     }
 
     /**

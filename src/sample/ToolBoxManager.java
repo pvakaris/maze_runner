@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
+
 /**
  * The object of this class is responsible for carrying-out appropriate actions based on the buttons that were clicked in the ToolBox.
  *
@@ -33,11 +36,12 @@ public class ToolBoxManager {
 
     /**
      * Called when the "Run" button in the ToolBox is clicked.
+     * @param event A MouseButton which was clicked
      */
-    public void runButtonWasClicked() {
+    public void runButtonWasClicked(MouseEvent event) {
         if(MapManager.getInstance().getCurrentMap().isValid()) {
             toolBox.setDisable(true);
-            Monitor.runMaze();
+            Monitor.runMaze(event);
             toolBox.setInnerVBox(afterRunBox);
             toolBox.disableRunButton();
             toolBox.setDisable(false);

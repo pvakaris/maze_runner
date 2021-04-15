@@ -1,9 +1,6 @@
 package sample;
 
-import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,25 +23,17 @@ public class MazeManipulator {
     }
 
     /**
-     * Used to run the Dijkstra's algorithm on the provided map.
+     * Used to run the Dijkstra's algorithm on the provided map slower.
+     */
+    public void delayedRun() {
+        searchingAlgorithm(true);
+    }
+
+    /**
+     * Used to run the Dijkstra's algorithm on the provided map on the highest speed.
      */
     public void run() {
-        // To hold all the discovered walkable cells
-        NodeQueue<WalkableCell> row = new NodeQueue<>();
-        // First we discover the starting cell
-        WalkableCell startCell = (WalkableCell) map.getStartCell();
-        dealWithNeighbourCells(row, startCell);
-        boolean finishReached = false;
-
-        while(!row.isEmpty() && !finishReached) {
-            // Take the first Cell in the queue and find neighbour Cells.
-            WalkableCell root = row.dequeue();
-            root.setExplored();
-            if(!dealWithNeighbourCells(row, root)) {
-                finishReached = true;
-            }
-        }
-        printFinishMessage(finishReached);
+        searchingAlgorithm(false);
     }
 
     /**
@@ -67,15 +56,23 @@ public class MazeManipulator {
 
     //     ------------        PRIVATE METHODS        ------------
 
-    /**
-     * Used to get the WalkableCell which the provided WalkableCell was discovered from
-     * and paint this cell using a new colour.
-     * @param cell A cell which to modify and whose ancestor cell to look for.
-     * @return An ancestor WalkableCell of the provided WalkableCell.
-     */
-    private WalkableCell getPreviousCell(WalkableCell cell) {
-        cell.setColor(ColourGenerator.getColour(Colour.PATH));
-        return (WalkableCell) cell.getPreviousCell();
+    private void searchingAlgorithm(boolean delayed) {
+        // To hold all the discovered walkable cells
+        NodeQueue<WalkableCell> row = new NodeQueue<>();
+        // First we discover the starting cell
+        WalkableCell startCell = (WalkableCell) map.getStartCell();
+        dealWithNeighbourCells(row, startCell, delayed);
+        boolean finishReached = false;
+
+        while(!row.isEmpty() && !finishReached) {
+            // Take the first Cell in the queue and find neighbour Cells.
+            WalkableCell root = row.dequeue();
+            root.setExplored();
+            if(!dealWithNeighbourCells(row, root, delayed)) {
+                finishReached = true;
+            }
+        }
+        printFinishMessage(finishReached);
     }
 
     /**
@@ -98,7 +95,7 @@ public class MazeManipulator {
      * @param root A cell whose neighbours to check.
      * @return true if the FinishCell was not found among the provided Cell neighbour cells, false otherwise.
      */
-    private boolean dealWithNeighbourCells(NodeQueue<WalkableCell> row, Cell root) {
+    private boolean dealWithNeighbourCells(NodeQueue<WalkableCell> row, Cell root, boolean delayed) {
         ArrayList<WalkableCell> neighbours = map.getNeighbourWalkableCells(root);
         for(WalkableCell cell : neighbours) {
             if(cell != null) {
@@ -110,9 +107,33 @@ public class MazeManipulator {
                     row.enqueue(cell);
                     cell.setDiscovered();
                     cell.setPreviousCell(root);
+                    if(delayed) delay();
                 }
             }
         }
         return true;
+    }
+
+    /**
+     * Used to get the WalkableCell which the provided WalkableCell was discovered from
+     * and paint this cell using a new colour.
+     * @param cell A cell which to modify and whose ancestor cell to look for.
+     * @return An ancestor WalkableCell of the provided WalkableCell.
+     */
+    private WalkableCell getPreviousCell(WalkableCell cell) {
+        cell.setColor(ColourGenerator.getColour(Colour.PATH));
+        return (WalkableCell) cell.getPreviousCell();
+    }
+
+    /**
+     * Used to cause a delay on the execution.
+     */
+    private void delay() {
+//        try {
+//            TimeUnit.SECONDS.sleep(1);
+//        }
+//        catch (InterruptedException e) {
+//            // DO NOTHING FOR NOW
+//        }
     }
 }

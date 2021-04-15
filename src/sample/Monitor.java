@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -70,13 +71,19 @@ public class Monitor {
 
     /**
      * Used when the "Run maze" button is clicked. Performs the maze running process.
+     * @param event A MouseButton which was clicked
      */
-    public static void runMaze() {
+    public static void runMaze(MouseEvent event) {
         setMazeRunning(true);
         MapManager.getInstance().makeMapCopy();
         MazeManipulator maze = new MazeManipulator(MapManager.getInstance().getCurrentMap());
         setMazeManipulator(maze);
-        maze.run();
+        if(event.getButton() == MouseButton.SECONDARY) {
+            maze.delayedRun();
+        }
+        else if(event.getButton() == MouseButton.PRIMARY) {
+            maze.run();
+        }
         setMazeRunning(false);
         Informer.getInstance().updateMapInfo(MapManager.getInstance().getCurrentMap().toString());
     }
