@@ -1,0 +1,15 @@
+.button {
+    -fx-font-size: 15;
+    -fx-max-width: INFINITY;
+    -fx-font-family: "Al Tarikh";
+    -fx-padding: 5;
+}
+
+#inner-toolbox {
+    -fx-spacing: 5;
+    -fx-padding: 5;
+}
+
+#toolbox {
+    -fx-padding: 5;
+}
