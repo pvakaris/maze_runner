@@ -7,3 +7,4 @@ An application where users can draw a 2D maze, choose starting and finishing poi
 Vakaris Paulavičius
 
 Version 1.0
+ 
